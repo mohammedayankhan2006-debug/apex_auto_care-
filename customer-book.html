@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="js/api.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Book Service - Apex AutoCare</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <header>
+        <nav class="navbar">
+
+            <div class="logo">
+                <a href="index.html">Apex AutoCare</a>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="customer-dashboard.html">Dashboard</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="customer-book.html" class="active">Book Service</a></li>
+                <li><a href="customer-tracking.html">Track Service</a></li>
+
+                <!-- LOGOUT -->
+                <li>
+                    <a href="#" id="logoutLink">Logout</a>
+                </li>
+
+            </ul>
+
+        </nav>
+    </header>
+
+
+    <!-- Booking Section -->
+    <main>
+
+        <section class="booking-section">
+
+            <div class="booking-container">
+
+                <h1>Book Vehicle Service</h1>
+
+                <p>
+                    Select your vehicle, service, preferred date and time,
+                    then choose doorstep service or a centre visit.
+                </p>
+
+
+                <form id="bookingForm">
+
+                    <!-- Service -->
+                    <label for="service">
+                        Select Service
+                    </label>
+
+                    <select id="service" name="service" required>
+
+                        <option value="">
+                            Select a service
+                        </option>
+
+                        <option value="General Service">
+                            General Service
+                        </option>
+
+                        <option value="Engine Diagnostics">
+                            Vehicle Diagnostics
+                        </option>
+
+                        <option value="Oil Change">
+                            Oil Change
+                        </option>
+
+                        <option value="Battery Service">
+                            Battery Service
+                        </option>
+
+                        <option value="Car Wash">
+                            Vehicle Wash
+                        </option>
+
+                        <option value="Other">
+                            Other
+                        </option>
+
+                    </select>
+
+
+                    <label for="serviceDescription" id="serviceDescriptionLabel">
+                        Describe the exact service you need (optional)
+                    </label>
+                    <textarea id="serviceDescription" name="serviceDescription" rows="4" maxlength="1000" placeholder="Optional for listed services; required if you choose Other"></textarea>
+
+                    <label for="vehicleType">Vehicle Type</label>
+                    <select id="vehicleType" name="vehicleType" required>
+                        <option value="">Select vehicle type</option>
+                        <option value="Bike">Bike</option>
+                        <option value="Car">Car</option>
+                        <option value="SUV">SUV</option>
+                        <option value="Truck">Truck</option>
+                    </select>
+
+                    <!-- Vehicle Number -->
+                    <label for="vehicleNumber">
+                        Vehicle Number
+                    </label>
+
+                    <input
+                        type="text"
+                        id="vehicleNumber"
+                        name="vehicleNumber"
+                        placeholder="Example: KA01AB1234"
+                        required
+                    >
+
+
+                    <!-- Vehicle Model -->
+                    <label for="vehicleModel">
+                        Vehicle Model / Name
+                    </label>
+
+                    <select
+                        id="vehicleModel"
+                        name="vehicleModel"
+                        required>
+
+                        <option value="">
+                            Select your vehicle
+                        </option>
+
+                        <option value="Maruti Swift">
+                            Maruti Swift
+                        </option>
+
+                        <option value="Maruti Baleno">
+                            Maruti Baleno
+                        </option>
+
+                        <option value="Hyundai Creta">
+                            Hyundai Creta
+                        </option>
+
+                        <option value="Hyundai i20">
+                            Hyundai i20
+                        </option>
+
+                        <option value="Honda City">
+                            Honda City
+                        </option>
+
+                        <option value="Honda Activa">
+                            Honda Activa
+                        </option>
+
+                        <option value="Tata Nexon">
+                            Tata Nexon
+                        </option>
+
+                        <option value="Tata Punch">
+                            Tata Punch
+                        </option>
+
+                        <option value="Mahindra Scorpio">
+                            Mahindra Scorpio
+                        </option>
+
+                        <option value="Mahindra Thar">
+                            Mahindra Thar
+                        </option>
+
+                        <option value="Toyota Innova">
+                            Toyota Innova
+                        </option>
+
+                        <option value="Other">
+                            Other
+                        </option>
+
+                    </select>
+
+
+                    <!-- Date -->
+                    <label for="serviceDate">
+                        Preferred Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="serviceDate"
+                        name="serviceDate"
+                        required
+                    >
+
+
+                    <!-- Time -->
+                    <label for="serviceTime">
+                        Preferred Time
+                    </label>
+
+                    <input
+                        type="time"
+                        id="serviceTime"
+                        name="serviceTime"
+                        required
+                    >
+
+
+                    <fieldset class="payment-options">
+                        <legend>Service Visit Type</legend>
+                        <label><input type="radio" name="bookingType" value="DOORSTEP" checked> Doorstep Visit</label>
+                        <label><input type="radio" name="bookingType" value="CENTRE_VISIT"> Centre Visit</label>
+                    </fieldset>
+
+                    <div id="doorstepLocationFields">
+                        <label for="address">Service Address</label>
+                        <textarea id="address" name="address" rows="4" placeholder="Enter your service location" required></textarea>
+
+                        <button type="button" id="locationButton" class="location-btn">
+                            Use My Current Location
+                        </button>
+                        <p id="locationStatus">Current location not selected.</p>
+                    </div>
+
+                    <p id="centreVisitMessage" class="booking-price" hidden>
+                        Please visit our centre for your service. No location sharing is needed for a centre visit.
+                    </p>
+
+
+                    <p class="booking-price" aria-live="polite">
+                        Service price: <strong id="servicePrice">Select a service to see its price</strong>
+                    </p>
+
+                    <fieldset class="payment-options">
+                        <legend>Payment Method</legend>
+                        <label><input type="radio" name="paymentMethod" value="CASH_ON_DELIVERY" required> Cash on delivery</label>
+                        <label><input type="radio" name="paymentMethod" value="PHONEPE" required> PhonePe / UPI</label>
+                    </fieldset>
+
+                    <!-- Submit -->
+                    <button
+                        type="submit"
+                        class="submit-btn">
+
+                        Book Service
+
+                    </button>
+
+                </form>
+
+
+                <!-- Booking Result -->
+                <div
+                    id="bookingResult"
+                    class="booking-result">
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <p>
+            &copy; 2026 Apex AutoCare. All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+    <!-- JavaScript -->
+    <script src="js/script.js"></script>
+    <script src="js/booking.js"></script>
+
+
+    <!-- LOGOUT JAVASCRIPT -->
+    <script>
+
+        const logoutLink =
+            document.getElementById("logoutLink");
+
+        if (logoutLink) {
+
+            logoutLink.addEventListener(
+                "click",
+                function (event) {
+
+                    event.preventDefault();
+
+                    // Clear customer login information
+                    localStorage.removeItem(
+                        "customer_id"
+                    );
+
+                    localStorage.removeItem(
+                        "customer_name"
+                    );
+
+                    localStorage.removeItem(
+                        "lastBookingId"
+                    );
+
+                    // Go back to login page
+                    window.location.href =
+                        "login.html";
+                }
+            );
+        }
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="js/api.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Track Service - Apex AutoCare</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Leaflet Map CSS -->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+<script>
+const trackingSessionExists = Boolean(
+    localStorage.getItem("api_session_token") &&
+    (localStorage.getItem("customer_id") || localStorage.getItem("admin_id") || localStorage.getItem("mechanic_id"))
+);
+if (!trackingSessionExists) {
+    document.documentElement.style.visibility = "hidden";
+    alert("Please login before tracking a service.");
+    window.location.replace("login.html");
+}
+</script>
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <header>
+        <nav class="navbar">
+
+            <div class="logo">
+                <a href="index.html">Apex AutoCare</a>
+            </div>
+
+            <ul class="nav-links">
+                <li>
+                    <a href="customer-dashboard.html">Dashboard</a>
+                </li>
+
+                <li>
+                    <a href="services.html">Services</a>
+                </li>
+
+                <li>
+                    <a href="customer-book.html">Book Service</a>
+                </li>
+
+                <li>
+                    <a href="customer-tracking.html" class="active">
+                        Track Service
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" id="logoutLink">Logout</a>
+                </li>
+            </ul>
+
+        </nav>
+    </header>
+
+
+    <!-- Tracking Section -->
+    <main>
+
+        <section class="tracking-section">
+
+            <div class="tracking-container">
+
+                <h1>Track Your Vehicle Service</h1>
+
+                <p>
+                    Enter your booking ID to view the latest service
+                    location information.
+                </p>
+
+
+                <!-- Booking ID -->
+                <div class="tracking-form">
+
+                    <label for="bookingId">
+                        Booking ID
+                    </label>
+
+                    <input
+                        type="text"
+                        id="bookingId"
+                        placeholder="Enter Booking ID"
+                    >
+
+                    <button
+                        type="button"
+                        id="loadTrackingButton">
+
+                        Load Tracking
+
+                    </button>
+
+                </div>
+
+
+                <!-- Tracking Status -->
+                <div id="trackingStatus">
+
+                    <p>
+                        Tracking information will appear here.
+                    </p>
+
+                </div>
+
+
+                <!-- Map -->
+                <div
+                    id="trackingMap"
+                    class="tracking-map">
+                </div>
+
+
+                <!-- Share Current Location -->
+                <div class="location-sharing">
+
+                    <h2>Share Your Current Location</h2>
+
+                    <p>
+                        Allow location access to share your current
+                        location for service tracking.
+                    </p>
+
+                    <button
+                        type="button"
+                        id="shareLocationButton">
+
+                        Share My Current Location
+
+                    </button>
+
+                    <p id="shareLocationStatus">
+                        Location sharing is not started.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <p>
+            &copy; 2026 Apex AutoCare. All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+    <!-- Leaflet Map JavaScript -->
+    <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+    </script>
+
+    <!-- Project JavaScript -->
+    <script src="js/script.js"></script>
+    <script src="js/tracking.js"></script>
+
+</body>
+</html>

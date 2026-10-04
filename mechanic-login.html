@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="js/api.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mechanic Login - Apex AutoCare</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<header>
+    <nav class="navbar">
+
+        <div class="logo">
+            <a href="index.html">Apex AutoCare</a>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="login.html">Customer Login</a></li>
+            <li><a href="mechanic-login.html" class="active">Mechanic Login</a></li>
+        </ul>
+
+    </nav>
+</header>
+
+
+<main>
+
+    <section class="auth-section">
+
+        <div class="auth-container">
+
+            <h1>Mechanic Login</h1>
+
+            <p>Login to access your mechanic dashboard.</p>
+
+            <form id="mechanicLoginForm">
+
+                <div class="form-group">
+                    <label for="mechanicEmail">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="mechanicEmail"
+                        placeholder="Enter mechanic email"
+                        required
+                    >
+                </div>
+
+
+                <div class="form-group">
+                    <label for="mechanicPassword">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="mechanicPassword"
+                        placeholder="Enter password"
+                        required
+                    >
+                </div>
+
+
+                <button type="submit">
+                    Login
+                </button>
+
+            </form>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+    <p>&copy; 2026 Apex AutoCare. All Rights Reserved.</p>
+</footer>
+
+
+<script src="js/mechanic-login.js"></script>
+
+</body>
+</html>

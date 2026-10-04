@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="js/api.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#080808">
+    <title>PhonePe Payment - Apex AutoCare</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { margin: 0; min-height: 100vh; padding: 24px 16px; display: grid; place-items: center; color: #fff; background: #080808; font-family: Arial, sans-serif; text-align: center; }
+        main { width: min(100%, 520px); }
+        h1 { margin: 0 0 10px; font-size: clamp(24px, 6vw, 34px); }
+        .booking { margin: 0 0 6px; color: #d6d6d6; }
+        .amount { margin: 0 0 18px; color: #c084fc; font-size: 25px; font-weight: 700; }
+        img { display: block; width: min(100%, 410px); height: auto; margin: 0 auto 18px; border-radius: 10px; }
+        .hint { margin: 0 auto 18px; max-width: 420px; line-height: 1.55; color: #ddd; }
+        .upi { color: #fff; font-weight: 700; }
+        .back { display: inline-block; margin: 0 0 20px; color: #c084fc; }
+        .notice { font-size: 13px; color: #aaa; line-height: 1.5; }
+        .done { width: 100%; margin: 12px 0; padding: 14px 18px; border: 0; border-radius: 8px; color: #fff; background: #e60012; font-size: 16px; font-weight: 700; cursor: pointer; }
+        .done:disabled { opacity: .6; cursor: wait; }
+        .status { min-height: 24px; margin: 12px 0; font-weight: 700; }
+    </style>
+</head>
+<body>
+    <main>
+        <a class="back" href="customer-book.html">&larr; Back to booking</a>
+        <h1>Pay with PhonePe</h1>
+        <p class="booking">Booking ID: <strong id="bookingId">&mdash;</strong></p>
+        <p class="amount" id="amount">&mdash;</p>
+        <img src="assets/phonepe-qr.jpeg" alt="Apex AutoCare PhonePe QR code">
+        <p class="hint">Scan this QR code using PhonePe or another UPI app. Enter the amount shown above and confirm the payee before paying.</p>
+        <p class="upi">UPI ID: sigmamen@axl</p>
+        <p class="notice">After paying in your UPI app, tap Done. Keep your booking ID; payment will show as successful after Apex AutoCare verifies the receipt.</p>
+        <button class="done" id="paymentDone" type="button">Done</button>
+        <p class="status" id="paymentStatus" role="status" aria-live="polite"></p>
+    </main>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const bookingId = params.get("booking_id") || "\u2014";
+        const amountParameter = params.get("amount");
+        const amountValue = amountParameter === null || amountParameter.trim() === "" ? NaN : Number(amountParameter);
+        document.getElementById("bookingId").textContent = bookingId;
+        document.getElementById("amount").textContent = Number.isFinite(amountValue)
+            ? new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 }).format(amountValue)
+            : "Amount unavailable";
+
+        const doneButton = document.getElementById("paymentDone");
+        const paymentStatus = document.getElementById("paymentStatus");
+        doneButton.addEventListener("click", async function () {
+            if (!/^(?:\d+|AAC-\d{6,})$/.test(bookingId)) {
+                paymentStatus.textContent = "Invalid booking ID. Please reopen the payment link from your booking confirmation.";
+                return;
+            }
+            if (!localStorage.getItem("customer_id") || !localStorage.getItem("api_session_token")) {
+                paymentStatus.textContent = "Please log in again from your customer account to submit payment.";
+                localStorage.setItem("paymentRedirect", "phonepe-payment.html" + window.location.search);
+                window.location.href = "login.html";
+                return;
+            }
+            doneButton.disabled = true;
+            paymentStatus.textContent = "Submitting payment confirmation...";
+            try {
+                const response = await fetch("http://localhost:3000/api/bookings/" + encodeURIComponent(bookingId) + "/payment/submit", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" }
+                });
+                if (response.status === 401) {
+                    localStorage.setItem("paymentRedirect", "phonepe-payment.html" + window.location.search);
+                    ["api_session_token", "customer_id", "customer_name", "customer_email"].forEach(key => localStorage.removeItem(key));
+                    window.location.href = "login.html";
+                    return;
+                }
+                const result = await response.json();
+                if (!response.ok || !result.success) throw new Error(result.message || "Could not submit payment confirmation.");
+                paymentStatus.textContent = "Payment confirmation submitted successfully. Payment is awaiting verification.";
+                doneButton.textContent = "Submitted";
+            } catch (error) {
+                paymentStatus.textContent = error.message || "Could not submit payment confirmation.";
+                doneButton.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>

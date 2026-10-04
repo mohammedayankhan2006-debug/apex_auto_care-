@@ -1,0 +1,384 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="js/api.js"></script>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Admin Dashboard - Apex AutoCare</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+
+</head>
+
+
+<body>
+
+
+    <!-- ================================
+         NAVIGATION BAR
+    ================================= -->
+
+    <header>
+
+        <nav class="navbar">
+
+            <div class="logo">
+
+                <a href="index.html">
+                    Apex AutoCare
+                </a>
+
+            </div>
+
+
+            <ul class="nav-links">
+
+                <li>
+                    <a
+                        href="admin-dashboard.html"
+                        class="active"
+                    >
+                        Dashboard
+                    </a>
+                </li>
+
+                <li>
+                    <a href="services.html">
+                        Services
+                    </a>
+                </li>
+
+                <li>
+                    <a href="login.html">
+                        Logout
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- ================================
+         ADMIN DASHBOARD
+    ================================= -->
+
+    <main>
+
+        <section class="dashboard-section">
+
+
+            <!-- DASHBOARD HEADER -->
+
+            <div class="dashboard-header">
+
+                <h1>
+                    Admin Dashboard
+                </h1>
+
+                <p>
+                    Manage customers, mechanics,
+                    services and vehicle service bookings.
+                </p>
+
+            </div>
+
+
+
+            <!-- ================================
+                 ADMIN CARDS
+            ================================= -->
+
+            <div class="dashboard-container">
+
+
+                <!-- CUSTOMERS -->
+
+                <div class="dashboard-card">
+
+                    <h2>
+                        Customers
+                    </h2>
+
+                    <p>
+                        View and manage registered customers.
+                    </p>
+
+                    <button
+                        type="button"
+                        class="dashboard-btn"
+                        onclick="showCustomers()"
+                    >
+                        View Customers
+                    </button>
+
+                </div>
+
+
+
+                <!-- MECHANICS -->
+
+                <div class="dashboard-card">
+
+                    <h2>
+                        Mechanics
+                    </h2>
+
+                    <p>
+                        View and manage mechanics available
+                        for vehicle services.
+                    </p>
+
+                    <button
+                        type="button"
+                        class="dashboard-btn"
+                        onclick="showMechanics()"
+                    >
+                        View Mechanics
+                    </button>
+
+                </div>
+
+
+
+                <!-- SERVICES -->
+
+                <div class="dashboard-card">
+
+                    <h2>
+                        Services
+                    </h2>
+
+                    <p>
+                        Manage vehicle service options
+                        offered by Apex AutoCare.
+                    </p>
+
+                    <button type="button" class="dashboard-btn" onclick="showServices()">
+                        View Services / Add Service
+                    </button>
+
+                </div>
+
+
+
+                <!-- BOOKINGS -->
+
+                <div class="dashboard-card">
+
+                    <h2>
+                        Bookings
+                    </h2>
+
+                    <p>
+                        View and manage customer vehicle
+                        service bookings.
+                    </p>
+
+                    <button
+                        type="button"
+                        class="dashboard-btn"
+                        onclick="showAllBookings()"
+                    >
+                        View Bookings
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <section class="booking-status" id="adminServicesPanel" style="display:none">
+                <h2>Services</h2>
+                <form id="addServiceForm">
+                    <label for="newServiceName">Service name</label>
+                    <input id="newServiceName" name="service_name" maxlength="100" required placeholder="e.g. Brake Repair">
+                    <label for="newServicePrice">Price (INR, minimum 2,000)</label>
+                    <input id="newServicePrice" name="price" type="number" min="2000" step="1" required>
+                    <button type="submit" class="dashboard-btn">Add Service</button>
+                    <p id="addServiceMessage" aria-live="polite"></p>
+                </form>
+                <div id="adminServiceList"><p>Loading services...</p></div>
+            </section>
+
+            <!-- ================================
+                 CUSTOMER LIST
+            ================================= -->
+
+            <div class="booking-status">
+
+                <h2>
+                    Registered Customers
+                </h2>
+
+                <div id="customerList">
+
+                    <p>
+                        Click "View Customers" to load customers.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ================================
+                 MECHANIC LIST
+            ================================= -->
+
+            <div class="booking-status">
+
+                <h2>
+                    Available Mechanics
+                </h2>
+
+                <div id="mechanicList">
+
+                    <p>
+                        Click "View Mechanics" to load mechanics.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ================================
+                 BOOKING MANAGEMENT
+            ================================= -->
+
+            <div class="booking-status">
+
+                <h2>
+                    Service Bookings
+                </h2>
+
+                <div id="adminBookingList">
+
+                    <p>
+                        Click "View Bookings" to load bookings.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ================================
+                 SERVICE STATISTICS
+            ================================= -->
+
+            <div class="admin-statistics">
+
+                <h2>
+                    Service Overview
+                </h2>
+
+
+                <div class="statistics-container">
+
+
+                    <div class="stat-card">
+
+                        <h3>
+                            Total Customers
+                        </h3>
+
+                        <p id="totalCustomers">
+                            0
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="stat-card">
+
+                        <h3>
+                            Total Mechanics
+                        </h3>
+
+                        <p id="totalMechanics">
+                            0
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="stat-card">
+
+                        <h3>
+                            Total Bookings
+                        </h3>
+
+                        <p id="totalBookings">
+                            &mdash;
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="stat-card">
+
+                        <h3>
+                            Completed Services
+                        </h3>
+
+                        <p id="completedServices">
+                            &mdash;
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+
+
+    <!-- ================================
+         FOOTER
+    ================================= -->
+
+    <footer>
+
+        <p>
+            &copy; 2026 Apex AutoCare.
+            All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>

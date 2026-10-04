@@ -1,0 +1,256 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="js/api.js"></script>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Login - Apex AutoCare
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+
+</head>
+
+
+<body>
+
+
+    <!-- ========================================
+         NAVBAR
+    ========================================= -->
+
+    <header>
+
+        <nav class="navbar">
+
+            <div class="container">
+
+                <a
+                    href="index.html"
+                    class="logo"
+                >
+                    Apex AutoCare
+                </a>
+
+
+                <div class="nav-links">
+
+                    <a href="index.html">
+                        Home
+                    </a>
+
+                    <a href="services.html">
+                        Services
+                    </a>
+
+                    <a href="about.html">
+                        About
+                    </a>
+
+                    <a href="contact.html">
+                        Contact
+                    </a>
+
+                    <a
+                        href="login.html"
+                        class="active"
+                    >
+                        Login
+                    </a>
+
+                    <a
+                        href="register.html"
+                        class="btn"
+                    >
+                        Register
+                    </a>
+
+                </div>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- ========================================
+         LOGIN SECTION
+    ========================================= -->
+
+    <main>
+
+        <section class="auth-section">
+
+            <div class="auth-container">
+
+
+                <div class="auth-header">
+
+                    <h1>
+                        Welcome Back
+                    </h1>
+
+                    <p>
+                        Login to your Apex AutoCare account
+                    </p>
+
+                </div>
+
+
+
+                <!-- ====================================
+                     LOGIN ROLE
+                ===================================== -->
+
+                <div class="form-group">
+
+                    <label for="loginRole">
+                        Login As
+                    </label>
+
+                    <select id="loginRole">
+
+                        <option value="customer">
+                            Customer
+                        </option>
+
+                        <option value="mechanic">
+                            Mechanic
+                        </option>
+
+                        <option value="admin">
+                            Admin
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- ====================================
+                     LOGIN FORM
+                ===================================== -->
+
+                <form id="loginForm">
+
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email Address
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Enter your email"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <button
+                        type="submit"
+                        class="auth-btn"
+                    >
+                        Login
+                    </button>
+
+
+                </form>
+
+
+
+                <!-- ====================================
+                     REGISTER LINK
+                ===================================== -->
+
+                <p
+                    class="auth-link"
+                    id="registerLink"
+                >
+
+                    Don't have an account?
+
+                    <a href="register.html">
+                        Create Account
+                    </a>
+
+                </p>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- ========================================
+         FOOTER
+    ========================================= -->
+
+    <footer>
+
+        <div class="container">
+
+            <p>
+                &copy; 2026 Apex AutoCare. All Rights Reserved.
+                All Rights Reserved.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- ========================================
+         LOGIN JAVASCRIPT
+    ========================================= -->
+
+    <script src="js/login.js"></script>
+
+</body>
+
+</html>

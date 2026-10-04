@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <script src="js/api.js"></script>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Mechanic Dashboard - Apex AutoCare</title>
+
+<link
+    rel="stylesheet"
+    href="css/style.css"
+>
+
+
+</head>
+
+<body>
+
+<!-- Navigation Bar -->
+<header>
+
+    <nav class="navbar">
+
+        <div class="container">
+
+            <div class="logo">
+
+                <a href="index.html">
+                    Apex AutoCare
+                </a>
+
+            </div>
+
+            <ul class="nav-links">
+
+                <li>
+                    <a
+                        href="mechanic-dashboard.html"
+                        class="active"
+                    >
+                        Dashboard
+                    </a>
+                </li>
+
+                <li>
+                    <a href="services.html">
+                        Services
+                    </a>
+                </li>
+
+                <li>
+                    <a
+                        href="login.html"
+                        id="mechanicLogout"
+                    >
+                        Logout
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </nav>
+
+</header>
+
+
+<!-- Mechanic Dashboard -->
+<main>
+
+    <section class="dashboard-section">
+
+        <div class="container">
+
+            <!-- Dashboard Header -->
+            <div class="dashboard-header">
+
+                <div>
+
+                    <span class="dashboard-label">
+                        MECHANIC PORTAL
+                    </span>
+
+                    <h1>
+                        Mechanic Dashboard
+                    </h1>
+
+                    <p id="mechanicWelcome">
+                        Welcome, Mechanic
+                    </p>
+
+                    <p class="dashboard-description">
+                        Manage your assigned vehicle services,
+                        view customer details and update service status.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Dashboard Cards -->
+            <div class="dashboard-container">
+
+                <div class="dashboard-card">
+
+                    <div class="dashboard-card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.7 6.3a5 5 0 0 0-6.4 6.4L3 18l3 3 5.3-5.3a5 5 0 0 0 6.4-6.4L15 12l-3-3z"/></svg></div>
+
+                    <h2>
+                        Assigned Services
+                    </h2>
+
+                    <p>
+                        View all vehicle service bookings
+                        assigned to you.
+                    </p>
+
+                    <button
+                        type="button"
+                        class="dashboard-btn"
+                        id="viewBookingsBtn"
+                    >
+                        View Bookings
+                    </button>
+
+                </div>
+
+
+                <div class="dashboard-card">
+
+                    <div class="dashboard-card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg></div>
+
+                    <h2>
+                        Today's Services
+                    </h2>
+
+                    <p>
+                        Check the services scheduled
+                        for today's work.
+                    </p>
+
+                    <button
+                        type="button"
+                        class="dashboard-btn"
+                        id="viewTodayBtn"
+                    >
+                        View Schedule
+                    </button>
+
+                </div>
+
+
+                <div class="dashboard-card">
+
+                    <div class="dashboard-card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="m19.4 15 .1.1 1.4 1.1-1.4 2.4-1.7-.7a8 8 0 0 1-1.5.9L16 20.5h-3l-.3-1.7a8 8 0 0 1-1.7-.7l-1.5.9-2.1-2.1.9-1.5a8 8 0 0 1-.7-1.7L6 13v-3l1.7-.3a8 8 0 0 1 .7-1.7l-.9-1.5 2.1-2.1 1.5.9a8 8 0 0 1 1.7-.7L13 3h3l.3 1.7a8 8 0 0 1 1.7.7l1.5-.9 2.1 2.1-.9 1.5a8 8 0 0 1 .7 1.7L23 10v3l-1.7.3a8 8 0 0 1-.7 1.7z" transform="translate(-2 -1) scale(.95)"/></svg></div>
+
+                    <h2>
+                        Update Status
+                    </h2>
+
+                    <p>
+                        Change the current status
+                        of a vehicle service.
+                    </p>
+
+                    <button
+                        type="button"
+                        class="dashboard-btn"
+                        id="updateStatusBtn"
+                    >
+                        Update Status
+                    </button>
+
+                </div>
+
+
+                <div class="dashboard-card">
+
+                    <div class="dashboard-card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></div>
+
+                    <h2>
+                        Customer Details
+                    </h2>
+
+                    <p>
+                        View customer and vehicle
+                        information.
+                    </p>
+
+                    <button
+                        type="button"
+                        class="dashboard-btn"
+                        id="viewDetailsBtn"
+                    >
+                        View Details
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Assigned Bookings -->
+            <div class="booking-status">
+
+                <div class="dashboard-panel-header">
+
+                    <div>
+
+                        <span class="panel-label">
+                            SERVICE MANAGEMENT
+                        </span>
+
+                        <h2>
+                            Service Bookings
+                        </h2>
+
+                    </div>
+
+                </div>
+
+                <div id="mechanicBookingList">
+
+                    <p>
+                        Loading bookings...
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Service Status -->
+            <div class="service-status">
+
+                <div class="dashboard-panel-header">
+
+                    <div>
+
+                        <span class="panel-label">
+                            BOOKING UPDATE
+                        </span>
+
+                        <h2>
+                            Update Service Status
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div class="status-form">
+
+                    <div class="status-field">
+
+                        <label for="bookingSelect">
+                            Select Booking
+                        </label>
+
+                        <select id="bookingSelect">
+
+                            <option value="">
+                                Select a booking
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="status-field">
+
+                        <label for="serviceStatus">
+                            Select Status
+                        </label>
+
+                        <select id="serviceStatus">
+
+                            <option value="Pending">
+                                Pending
+                            </option>
+
+                            <option value="Accepted">
+                                Accepted
+                            </option>
+
+                            <option value="On the Way">
+                                On the Way
+                            </option>
+
+                            <option value="In Progress">
+                                Service In Progress
+                            </option>
+
+                            <option value="Completed">
+                                Completed
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <button
+                        type="button"
+                        class="submit-btn"
+                        id="saveStatusBtn"
+                    >
+                        Save Status
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- Footer -->
+<footer>
+
+    <p>
+        &copy; 2026 Apex AutoCare.
+        All Rights Reserved.
+    </p>
+
+</footer>
+
+
+<!-- Mechanic Dashboard JavaScript -->
+<script src="js/mechanic-dashboard.js"></script>
+
+</body>
+
+</html>

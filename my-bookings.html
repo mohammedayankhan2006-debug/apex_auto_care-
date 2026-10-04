@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="js/api.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Bookings - Apex AutoCare</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <header>
+        <nav class="navbar">
+
+            <div class="logo">
+                <a href="index.html">Apex AutoCare</a>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="customer-book.html">Book Service</a></li>
+                <li><a href="my-bookings.html" class="active">My Bookings</a></li>
+            </ul>
+
+        </nav>
+    </header>
+
+
+    <!-- MAIN CONTENT -->
+    <main>
+
+        <section class="booking-history-section">
+
+            <div class="booking-history-container">
+
+                <h1>My Bookings</h1>
+
+                <p>
+                    View your service booking history below.
+                </p>
+
+
+                <!-- BOOKING LIST -->
+                <div id="bookingList">
+
+                    <p id="loadingMessage">
+                        Loading your bookings...
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <p>
+            &copy; 2026 Apex AutoCare. All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+    <script src="js/my-bookings.js"></script>
+
+</body>
+
+</html>

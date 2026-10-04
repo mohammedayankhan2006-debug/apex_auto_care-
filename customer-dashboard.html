@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="js/api.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Customer Dashboard - Apex AutoCare</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <header>
+
+        <nav class="navbar">
+
+            <div class="logo">
+                <a href="index.html">
+                    Apex AutoCare
+                </a>
+            </div>
+
+            <ul class="nav-links">
+
+                <li>
+                    <a href="index.html">
+                        Home
+                    </a>
+                </li>
+
+                <li>
+                    <a href="services.html">
+                        Services
+                    </a>
+                </li>
+
+                <li>
+                    <a href="customer-book.html">
+                        Book Service
+                    </a>
+                </li>
+
+                <li>
+                    <a href="customer-dashboard.html"
+                       class="active">
+                        Track Service
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" id="logoutBtn">
+                        Logout
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </header>
+
+
+    <!-- Dashboard -->
+    <main>
+
+        <section class="auth-section">
+
+            <div class="auth-container">
+
+                <h1>
+                    Customer Dashboard
+                </h1>
+
+                <p id="welcomeMessage">
+                    Welcome to Apex AutoCare
+                </p>
+
+
+                <!-- Customer Information -->
+
+                <div class="booking-item">
+
+                    <h2>
+                        My Service Booking
+                    </h2>
+
+                    <p>
+                        <strong>Customer ID:</strong>
+                        <span id="customerId">
+                            Loading...
+                        </span>
+                    </p>
+
+                </div>
+
+
+                <!-- Booking Details -->
+
+                <div
+                    id="bookingDetails"
+                    class="booking-item"
+                >
+
+                    <p>
+                        Loading booking details...
+                    </p>
+
+                </div>
+
+
+                <!-- Status -->
+
+                <div
+                    id="serviceStatus"
+                    class="booking-item"
+                >
+
+                    <h2>
+                        Service Status
+                    </h2>
+
+                    <p id="statusText">
+                        Loading...
+                    </p>
+
+                </div>
+
+
+                <!-- Refresh -->
+
+                <button
+                    type="button"
+                    id="refreshBtn"
+                >
+                    Refresh Booking Status
+                </button>
+
+
+                <br><br>
+
+
+                <!-- New Booking -->
+
+                <a
+                    href="customer-book.html"
+                    class="btn"
+                >
+                    Book Another Service
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+
+    <footer>
+
+        <p>
+            &copy; 2026 Apex AutoCare.
+            All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+    <!-- Dashboard JavaScript -->
+
+    <script src="js/customer-dashboard.js"></script>
+
+</body>
+
+</html>
